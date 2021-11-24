@@ -14,6 +14,7 @@ import (
 
 type Job struct {
 	Name    string
+	Des     string
 	inner   cron.Job
 	status  uint32
 	Status  string
