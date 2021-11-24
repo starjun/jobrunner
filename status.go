@@ -8,6 +8,7 @@ import (
 
 type StatusData struct {
 	Id        cron.EntryID
+	Des       string
 	JobRunner *Job
 	Next      time.Time
 	Prev      time.Time

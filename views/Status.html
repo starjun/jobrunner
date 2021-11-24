@@ -51,6 +51,7 @@ th {
 	<tr>
 		<td>{{.Id}}</td>
 		<td>{{.JobRunner.Name}}</td>
+		<td>{{.JobRunner.Des}}</td>
 		<td>{{.JobRunner.Status}}</td>
 		<td>{{if not .Prev.IsZero}}{{.Prev.Format "2006-01-02 15:04:05"}}{{end}}</td>
 		<td>{{if not .Next.IsZero}}{{.Next.Format "2006-01-02 15:04:05"}}{{end}}</td>

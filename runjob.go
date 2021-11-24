@@ -25,32 +25,35 @@ type Func func()
 
 func (r Func) Run() { r() }
 
-func Schedule(spec string, job cron.Job) error {
+// spec 时间设置
+// job 任务配置
+// des 任务描述
+func Schedule(spec string, job cron.Job, s ...string) error {
 	sched, err := cron.ParseStandard(spec)
 	if err != nil {
 		return err
 	}
-	MainCron.Schedule(sched, New(job))
+	MainCron.Schedule(sched, New(job, s...))
 	return nil
 }
 
 // Run the given job at a fixed interval.
 // The interval provided is the time between the job ending and the job being run again.
 // The time that the job takes to run is not included in the interval.
-func Every(duration time.Duration, job cron.Job) {
+func Every(duration time.Duration, job cron.Job, s ...string) {
 
-	MainCron.Schedule(cron.Every(duration), New(job))
+	MainCron.Schedule(cron.Every(duration), New(job, s...))
 }
 
 // Run the given job right now.
-func Now(job cron.Job) {
-	go New(job).Run()
+func Now(job cron.Job, s ...string) {
+	go New(job, s...).Run()
 }
 
 // Run the given job once, after the given delay.
-func In(duration time.Duration, job cron.Job) {
+func In(duration time.Duration, job cron.Job, s ...string) {
 	go func() {
 		time.Sleep(duration)
-		New(job).Run()
+		New(job, s...).Run()
 	}()
 }
